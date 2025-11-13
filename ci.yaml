@@ -1,0 +1,22 @@
+name: Node CI
+on:
+    push:
+      branches: [ main ]
+    pull_request:
+      branches: [ main ]
+jobs:
+  ci:
+     runs-on: ubantu-latest
+     steps:
+       - name: Checkout code
+         uses: actions/checkout@v4
+       - name: setup node
+         uses: actions/setup-node@v4
+         with:
+            node-version: '20'
+       - name: install deps
+         run: npm ci
+       - name: Run lint
+         run: npm run lint
+       - name: Run tests
+         run: npm run test
